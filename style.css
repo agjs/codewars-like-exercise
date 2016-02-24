@@ -1,0 +1,41 @@
+/** 
+ * Styles to reset document
+ */
+* {
+  padding: 0;
+  margin: 0;
+  outline:none;
+}
+
+body {
+  margin: 10px;
+}
+
+/** =========================== **
+ **                             **
+ **   Write your style below    **
+ **                             **
+ ** =========================== **/
+
+ input {
+ 	padding: 10px;
+    width: 250px;
+ }
+
+button {
+	-webkit-appearance: none;
+	border:0;
+	padding:12px;
+	background: #000000;
+	color: #FFFFFF;
+}
+
+
+li {
+	width: 328px;
+    padding: 5px;
+    background: #e9e9e9;
+}
+
+li:nth-child(even) {background: #d9d7d7}
+	
