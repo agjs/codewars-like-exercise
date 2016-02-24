@@ -16,7 +16,7 @@ var connections = [{
 }, {
   id: 4,
   name: "Stark",
-  follow: [1, 2]
+  follow: [1, 2, 3]
 }];
 
 /** 
@@ -42,36 +42,63 @@ function handleSubmit() {
  ** =========================== **/
 
 
+
+// var connections = [{
+//   id: 1,
+//   name: "Lannister",
+//   follow: [2, 3]
+// }, {
+//   id: 2,
+//   name: "Mormont",
+//   follow: [3]
+// }, {
+//   id: 3,
+//   name: "Targaryen",
+//   follow: [1, 2]
+// }, {
+//   id: 4,
+//   name: "Stark",
+//   follow: [1, 2, 3]
+// }];
+
+
+
+function family(name) {
+
+  for (var i = 0; i < connections.length; i++) {
+
+    if (connections[i].name === name) {
+
+      return connections[i];
+
+    }
+  }
+
+}
+
 function handleInput(value) {
 
   var data = [];
 
+  var selectedFamily = family(value);
+
   for (var i = 0; i < connections.length; i++) {
 
-    if (connections[i].name === value) {
+    if (selectedFamily.follow.indexOf(connections[i].id) >= 0 && connections[i].follow.indexOf(selectedFamily.id) >= 0) {
 
-      for (var j = 0; j < connections.length; j++) {
+      data.push('<li>' + connections[i].name + ' and ' + selectedFamily.name + ' are following each other.</li>');
 
-        if (connections[j].follow.indexOf(connections[i].id) >= 0 && connections[i].follow.indexOf(connections[j].id) >= 0) {
+    } else if (connections[i].follow.indexOf(selectedFamily.id) >= 0) {
 
-          data.push('<li>' + connections[i].name + ' and ' + connections[j].name + ' are following each other.</li>');
+      data.push('<li>' + connections[i].name + ' follows ' + selectedFamily.name + '</li>');
 
-        } else if (connections[i].follow.indexOf(connections[j].id) >= 0) {
+    } else if (selectedFamily.follow.indexOf(connections[i].id) >= 0) {
 
-          data.push('<li>' + connections[i].name + ' follows ' + connections[j].name + '</li>');
-
-        } else if (connections[j].follow.indexOf(connections[i].id) >= 0) {
-
-          data.push('<li>' + connections[i].name + ' is followed by ' + connections[j].name + '</li>');
-
-        }
-
-      }
+      data.push('<li>' + connections[i].name + ' is followed by ' + selectedFamily.name + '</li>');
 
     }
 
   }
 
   updateList(data.join(""));
-
 }
